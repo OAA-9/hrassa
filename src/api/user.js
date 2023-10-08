@@ -11,15 +11,25 @@ import request from '@/utils/request'
 export const login = data => {
   return request({
     url: '/sys/login',
-    method: 'post',
+    method: 'POST',
     data
   })
 }
 
-export function getInfo (token) {
+export const getUserInfo = () => {
+  return request({
+    url: '/sys/profile',
+    method: 'POST'
 
+  })
 }
 
+export const getUserDetailById = id => {
+  return request({
+    url: `/sys/user/{id}`,
+    method: 'GET'
+  })
+}
 export function logout () {
 
 }

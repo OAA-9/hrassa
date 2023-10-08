@@ -90,11 +90,11 @@ export default {
     return {
       loginForm: {
         mobile: '13800000002',
-        password: '111111'
+        password: 'hm#qd@23!'
       },
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', message: '手机号不能为空' }, { validator: validateMobile }],
-        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }, { trigger: 'blur', min: 6, max: 16, message: '密码长度为6-16为之间' }]
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }, { trigger: 'blur', min: 6, max: 18, message: '密码长度为6-18为之间' }]
       },
       loading: false,
       passwordType: 'password',

@@ -12,6 +12,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import * as directives from '@/directives'
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -19,6 +20,19 @@ import '@/permission' // permission control
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+
+// {imagerror: {}, abc1: {}, ...}
+// 注册自定义指令
+// 遍历所有的导出的指令对象 完成自定义全局注册
+// ['iamgerror', 'abc1', ...]
+Object.keys(directives).forEach(key => {
+  // 注册自定义指令
+  Vue.directive(key, directives[key])
+
+  // Vue.derective('iamgerror', {})
+  // Vue.derective('abc1', {})
+  // Vue.derective('abc2', {})
+})
 
 Vue.config.productionTip = false
 
