@@ -74,6 +74,26 @@ export default {
         // 编辑部门的操作
       } else {
         // 删除部门的操作
+        // this.$confirm('您确定要删除该组织部门吗').then(() => {
+        //   return delDepartments(this.treeNode.id)
+        // }).then(() => {
+        //   //  如果删除成功了  就会进入这里
+        //   this.$emit('delDepts')
+        //   this.$message.success('删除部门成功')
+        // })
+        this.$confirm('您确定要删除该组织部门吗').then(async () => {
+          try {
+            // 返回promise对象
+            await delDepartments(this.treeNode.id)
+            // 触发自定义事件
+            this.$emit('delDepts')
+            this.$message.success('删除部门成功')
+          } catch (error) {
+            this.$message.error('删除部门失败')
+          }
+        }).catch(() => {
+          console.log('用户删除失败')
+        })
       }
     }
   }
