@@ -7,6 +7,7 @@
         <tree-tools
           :tree-node="company"
           :is-root="true"
+          @addDepts="addDepts"
         />
         <!--放置一个属性   这里的props和我们之前学习的父传子 的props没关系-->
         <el-tree
@@ -21,10 +22,19 @@
             slot-scope="{ data }"
             :tree-node="data"
             @delDepts="getDepartments"
+            @addDepts="addDepts"
+            @editDepts="editDepts"
           />
         </el-tree>
       </el-card>
     </div>
+    <!-- 放置弹出层组件 -->
+    <add-dept
+      ref="addDept"
+      :show-dialog.sync="showDialog"
+      :tree-node="node"
+      @addDepts="getDepartments"
+    />
   </div>
 </template>
 
@@ -32,10 +42,12 @@
 import TreeTools from './components/tree-tools'
 import { getDepartments } from '@/api/departments'
 import { tranListToTreeData } from '@/utils'
+import AddDept from './components/add-dept' // 引入新增部门组件
 
 export default {
   components: {
-    TreeTools
+    TreeTools,
+    AddDept
   },
   data () {
     return {
@@ -43,7 +55,9 @@ export default {
       departs: [],
       defaultProps: {
         label: 'name' // 表示 从这个属性显示内容
-      }
+      },
+      showDialog: false,
+      node: null
     }
   },
   created () {
@@ -52,9 +66,21 @@ export default {
   methods: {
     async getDepartments () {
       const result = await getDepartments()
-      this.company = { name: result.companyName, manager: '负责人' }
+      this.company = { name: result.companyName, manager: '负责人', id: '' }
       this.departs = tranListToTreeData(result.depts, '')
       console.log(result)
+    },
+    addDepts (node) {
+      // 显示弹出层
+      this.showDialog = true
+      // 将要点击的部门记录下来
+      this.node = node
+    },
+    editDepts (node) {
+      // 显示弹出层
+      this.showDialog = true
+      this.node = node
+      this.$refs.addDepts.getDepartDetail(node.id)
     }
   }
 }
