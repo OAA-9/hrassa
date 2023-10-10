@@ -180,7 +180,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   // 组件名称
-  name: 'DashboardContainer',
+  name: 'Setting',
   // 局部注册的组件
   components: {},
   // 组件参数 接收来自父组件的数据
