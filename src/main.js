@@ -14,6 +14,7 @@ import router from './router'
 import components from './components'
 
 import * as directives from '@/directives'
+import * as filters from '@/filters' // 引入工具类
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -29,6 +30,10 @@ Object.keys(directives).forEach((key) => {
   Vue.directive(key, directives[key])
 })
 
+// 注册自定义过滤器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 // 注册自定义组件
 Vue.use(components)
 Vue.config.productionTip = false
