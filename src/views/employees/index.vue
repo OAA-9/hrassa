@@ -120,6 +120,7 @@
               <el-button
                 type="text"
                 size="small"
+                @click="editRole(row.id)"
               >角色</el-button>
               <el-button
                 type="text"
@@ -160,6 +161,12 @@
         <canvas ref="myCanvas" />
       </el-row>
     </el-dialog>
+    <!-- 放置分配组件 -->
+    <assign-role
+      ref="assignRole"
+      :show-role-dialog.sync="showRoleDialog"
+      :user-id="userId"
+    />
   </div>
 </template>
 
@@ -169,23 +176,26 @@ import EmployeeEnum from '@/api/constant/employees'
 import AddEmployee from './components/add-employee'
 import { formatDate } from '@/filters'
 import QrCode from 'qrcode'
+import AssignRole from './components/assign-role'
 
 export default {
   components: {
-    AddEmployee
+    AddEmployee,
+    AssignRole
   },
   data () {
     return {
-      loading: false,
       list: [], // 接数据的
       page: {
         page: 1, // 当前页码
         size: 10,
         total: 0 // 总数
       },
-      showdialog: false,
-      showCodeDialog: false
-
+      loading: false,
+      showDialog: false,
+      showCodeDialog: false,
+      showRoleDialog: false,
+      userId: null
     }
   },
   created () {
@@ -286,6 +296,11 @@ export default {
       } else {
         this.$message.warning('该用户还未上传头像')
       }
+    },
+    async editRole (id) {
+      this.userId = id
+      await this.$refs.assignRole.getUserDetailById(id)
+      this.showRoleDialog = true
     }
   }
 }
