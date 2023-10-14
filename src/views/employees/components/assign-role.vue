@@ -56,8 +56,8 @@ export default {
   },
   data () {
     return {
-      list: [], // 存储所有角色列表
-      roleIds: [] // 存储当前用户所拥有的角色id
+      list: [], // 所有角色列表
+      roleIds: [] // 当前用户所拥有的角色id
     }
   },
   created () {
@@ -79,11 +79,11 @@ export default {
     },
     async btnOk () {
       await assignRoles({ id: this.id, roleIds: this.roleIds })
-      this.$emit('updata:showRoleDialog', false)
+      this.$emit('update:showRoleDialog', false)
     },
     btnCancel () {
       this.roleIds = []
-      this.$emit('updata:showRoleDialog', false)
+      this.$emit('update:showRoleDialog', false)
     }
   }
 }
