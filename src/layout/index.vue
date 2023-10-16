@@ -12,6 +12,8 @@
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
+        <!-- 放置多页签组件 -->
+        <tags-view />
       </div>
       <app-main />
     </div>

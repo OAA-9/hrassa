@@ -1,8 +1,6 @@
 <template>
   <div v-if="!item.hidden">
-    <template
-      v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow"
-    >
+    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link
         v-if="onlyOneChild.meta"
         :to="resolvePath(onlyOneChild.path)"
@@ -11,9 +9,11 @@
           :index="resolvePath(onlyOneChild.path)"
           :class="{'submenu-title-noDropdown':!isNest}"
         >
+          <!-- 每个组件都有一个$t(key) 会返回当前语言下的语言包的显示内容 -->
+          <!-- $t()方法可以传入带点的字符串 表示查询嵌套结构的值 -->
           <item
             :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
-            :title="onlyOneChild.meta.title"
+            :title="$t('route.'+onlyOneChild.name)"
           />
         </el-menu-item>
       </app-link>
