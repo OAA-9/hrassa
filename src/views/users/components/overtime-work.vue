@@ -1,27 +1,80 @@
 <template>
   <div class="usersContainer">
-    <el-form ref="ruleForm2" :model="ruleForm" status-icon :rules="rules" label-width="110px" class="demo-ruleForm">
-      <el-form-item label="申请类型" prop="region">
-        <el-select v-model="ruleForm.value" placeholder="请选择" style="width: 220px;">
-          <el-option v-for="item in ruleForm.options" :key="item.value" :label="item.label" :value="item.value" />
+    <el-form
+      ref="ruleForm2"
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      label-width="110px"
+      class="demo-ruleForm"
+    >
+      <el-form-item
+        label="申请类型"
+        prop="region"
+      >
+        <el-select
+          v-model="ruleForm.value"
+          placeholder="请选择"
+          style="width: 220px;"
+        >
+          <el-option
+            v-for="item in ruleForm.options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
         </el-select>
       </el-form-item>
-      <el-form-item label="加班开始时间" prop="times">
+      <el-form-item
+        label="加班开始时间"
+        prop="times"
+      >
         <el-col :span="8">
-          <el-date-picker v-model="ruleForm.time1" type="date" placeholder="选择日期" style="width: 100%;" />
+          <el-date-picker
+            v-model="ruleForm.time1"
+            type="date"
+            placeholder="选择日期"
+            style="width: 100%;"
+          />
         </el-col>
-        <el-col class="line" :span="1" style="text-align: center">-</el-col>
+        <el-col
+          class="line"
+          :span="1"
+          style="text-align: center"
+        >-</el-col>
         <el-col :span="8">
-          <el-time-picker v-model="ruleForm.time1" type="fixed-time" placeholder="选择时间" style="width: 100%;" />
+          <el-time-picker
+            v-model="ruleForm.time1"
+            type="fixed-time"
+            placeholder="选择时间"
+            style="width: 100%;"
+          />
         </el-col>
       </el-form-item>
-      <el-form-item label="加班结束时间" prop="times">
+      <el-form-item
+        label="加班结束时间"
+        prop="times"
+      >
         <el-col :span="8">
-          <el-date-picker v-model="ruleForm.time1" type="date" placeholder="选择日期" style="width: 100%;" />
+          <el-date-picker
+            v-model="ruleForm.time1"
+            type="date"
+            placeholder="选择日期"
+            style="width: 100%;"
+          />
         </el-col>
-        <el-col class="line" :span="1" style="text-align: center">-</el-col>
+        <el-col
+          class="line"
+          :span="1"
+          style="text-align: center"
+        >-</el-col>
         <el-col :span="8">
-          <el-time-picker v-model="ruleForm.time1" type="fixed-time" placeholder="选择时间" style="width: 100%;" />
+          <el-time-picker
+            v-model="ruleForm.time1"
+            type="fixed-time"
+            placeholder="选择时间"
+            style="width: 100%;"
+          />
         </el-col>
       </el-form-item>
       <el-form-item label="补偿方式">
@@ -30,20 +83,48 @@
       <el-form-item label="加班时长">
         <div>1小时 <span style="color:#f00;"> 111加班时长根据开始时间与结束时间自动计算，最小0.5小时</span></div>
       </el-form-item>
-      <el-form-item label="加班原因" prop="reason">
-        <el-input v-model="ruleForm.textarea" type="textarea" style="width: 340px;" :autosize="{ minRows: 3, maxRows: 8}" placeholder="请输入内容" />
+      <el-form-item
+        label="加班原因"
+        prop="reason"
+      >
+        <el-input
+          v-model="ruleForm.textarea"
+          type="textarea"
+          style="width: 340px;"
+          :autosize="{ minRows: 3, maxRows: 8}"
+          placeholder="请输入内容"
+        />
       </el-form-item>
-      <el-form-item label="图片" prop="age">
-        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+      <el-form-item
+        label="图片"
+        prop="age"
+      >
+        <el-upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove"
+        >
           <i class="el-icon-plus" />
-          <div slot="tip" class="el-upload__tip" style="color:#f00;">注： 只能上传jpg/png文件，且不超过500kb</div>
+          <div
+            slot="tip"
+            class="el-upload__tip"
+            style="color:#f00;"
+          >注： 只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
-          <img width="100%" :src="dialogImageUrl" alt="">
+          <img
+            width="100%"
+            :src="dialogImageUrl"
+            alt=""
+          >
         </el-dialog>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
+        <el-button
+          type="primary"
+          @click="submitForm('ruleForm2')"
+        >提交</el-button>
         <el-button @click="resetForm('ruleForm2')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -54,7 +135,7 @@
 
 export default {
   name: 'UsersTableIndex',
-  data() {
+  data () {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
@@ -85,10 +166,10 @@ export default {
     }
   },
   methods: {
-    handleRemove(file, fileList) {
+    handleRemove (file, fileList) {
       console.log(file, fileList)
     },
-    handlePictureCardPreview(file) {
+    handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     }
@@ -97,14 +178,14 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "./../../styles/variables";
-  .usersContainer{
-    .el-form-item{
-      margin-bottom: 20px;
-      .el-form-item__error{
-        position: relative;
-        margin-left: 300px;
-      }
+@import "./../../styles/variables";
+.usersContainer {
+  .el-form-item {
+    margin-bottom: 20px;
+    .el-form-item__error {
+      position: relative;
+      margin-left: 300px;
     }
   }
+}
 </style>

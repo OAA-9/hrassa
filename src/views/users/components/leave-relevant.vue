@@ -9,7 +9,12 @@
       enctype="multipart/form-data"
     >
       <el-form-item label="假期类型">
-        <el-select v-model="ruleForm.holidayType" placeholder="请选择" style="width: 220px;" @change="handleChange">
+        <el-select
+          v-model="ruleForm.holidayType"
+          placeholder="请选择"
+          style="width: 220px;"
+          @change="handleChange"
+        >
           <el-option
             v-for="item in baseData.leaveType"
             :key="item.id"
@@ -21,7 +26,10 @@
       <el-form-item label="申请单位">
         <span>按天</span>
       </el-form-item>
-      <el-form-item label="开始时间" prop="startTime">
+      <el-form-item
+        label="开始时间"
+        prop="startTime"
+      >
         <el-col :span="8">
           <el-date-picker
             v-model="ruleForm.startTime"
@@ -32,7 +40,10 @@
           />
         </el-col>
       </el-form-item>
-      <el-form-item label="结束时间" prop="endTime">
+      <el-form-item
+        label="结束时间"
+        prop="endTime"
+      >
         <el-col :span="8">
           <el-date-picker
             v-model="ruleForm.endTime"
@@ -43,13 +54,28 @@
           />
         </el-col>
       </el-form-item>
-      <el-form-item v-if="state===&quot;1&quot;" label="请假时长">
-        <el-input v-model="ruleForm.duration" style="width: 340px;" />
+      <el-form-item
+        v-if="state===&quot;1&quot;"
+        label="请假时长"
+      >
+        <el-input
+          v-model="ruleForm.duration"
+          style="width: 340px;"
+        />
       </el-form-item>
-      <el-form-item v-if="state===&quot;0&quot;" label="申请天数">
-        <el-input v-model="ruleForm.duration" style="width: 340px;" />
+      <el-form-item
+        v-if="state===&quot;0&quot;"
+        label="申请天数"
+      >
+        <el-input
+          v-model="ruleForm.duration"
+          style="width: 340px;"
+        />
       </el-form-item>
-      <el-form-item label="申请理由" prop="reason">
+      <el-form-item
+        label="申请理由"
+        prop="reason"
+      >
         <el-input
           v-model="ruleForm.reason"
           type="textarea"
@@ -59,7 +85,10 @@
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button
+          type="primary"
+          @click="submitForm('ruleForm')"
+        >提交</el-button>
         <el-button @click="resetForm()">重置</el-button>
       </el-form-item>
     </el-form>
@@ -71,7 +100,7 @@ import { applyeLave, startProcess } from '@/api/approvals'
 import commonApi from '@/api/constant/user'
 export default {
   name: 'UsersTableIndex',
-  data() {
+  data () {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
@@ -110,7 +139,7 @@ export default {
     }
   },
   computed: {
-    computeDuration() {
+    computeDuration () {
       let duration = 0
       if (this.ruleForm.start_time && this.ruleForm.end_time) {
         const durationStamp = (new Date(this.ruleForm.end_time)).valueOf() - (new Date(this.ruleForm.start_time)).valueOf()
@@ -121,17 +150,17 @@ export default {
       return duration
     }
   },
-  created() {
+  created () {
   },
   methods: {
-    handleRemove(file, fileList) {
+    handleRemove (file, fileList) {
       console.log(file, fileList)
     },
-    handlePictureCardPreview(file) {
+    handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     },
-    submitForm(name) {
+    submitForm (name) {
       console.log(this.ruleForm)
       startProcess(this.ruleForm).then(res => {
         if (res.data.success) {
@@ -140,13 +169,13 @@ export default {
         }
       })
     },
-    resetForm() {
+    resetForm () {
       this.ruleForm = {}
     },
-    handleChange(obj) {
+    handleChange (obj) {
       this.state = obj
     },
-    submitUpload(content) {
+    submitUpload (content) {
       const formData = new FormData()
       formData.append('file', content.file)
       formData.append('start_time', this.ruleForm.start_time)

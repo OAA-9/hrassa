@@ -9,14 +9,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.scss' // global css
 
 import App from './App'
-import store from './store'
-import router from './router'
 import components from './components'
+import router from './router'
+import store from './store'
 
 import * as directives from '@/directives'
 import * as filters from '@/filters' // 引入工具类
-import checkPermission from '@/mixin/checkPermission'
 import i18n from '@/lang'
+import checkPermission from '@/mixin/checkPermission'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -29,7 +29,6 @@ import '@/permission' // permission control
 Vue.use(ElementUI, {
   // element本身支持i18n的处理
   i18n: (key, value) => i18n.t(key, value)
-
 })
 // 注册自定义指令
 // 遍历所有的导出的指令对象 完成自定义全局注册
@@ -39,7 +38,7 @@ Object.keys(directives).forEach((key) => {
 })
 
 // 注册自定义过滤器
-Object.keys(filters).forEach(key => {
+Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
 // 注册自定义组件

@@ -1,8 +1,18 @@
 <template>
   <div class="add-form">
-    <el-dialog title="设置" :visible.sync="dialogFormVisible">
-      <el-tabs v-model="activeName" style="margin-left:20px" @tab-click="handleClick">
-        <el-tab-pane label="出勤设置" name="first">
+    <el-dialog
+      title="设置"
+      :visible.sync="dialogFormVisible"
+    >
+      <el-tabs
+        v-model="activeName"
+        style="margin-left:20px"
+        @tab-click="handleClick"
+      >
+        <el-tab-pane
+          label="出勤设置"
+          name="first"
+        >
           <el-form
             ref="dataForm"
             :rules="rules"
@@ -12,8 +22,15 @@
             style="width:700px;"
             class="titmInfo"
           >
-            <el-form-item label="部门：" prop="departmentId">
-              <el-select v-model="formBase.departmentId" placeholder="请选择" @change="handleChange">
+            <el-form-item
+              label="部门："
+              prop="departmentId"
+            >
+              <el-select
+                v-model="formBase.departmentId"
+                placeholder="请选择"
+                @change="handleChange"
+              >
                 <el-option
                   v-for="item in departmentData"
                   :key="item.id"
@@ -22,7 +39,11 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="出勤时间：" prop="morningStartTime" style="">
+            <el-form-item
+              label="出勤时间："
+              prop="morningStartTime"
+              style=""
+            >
               <el-time-select
                 v-model="formBase.morningStartTime"
                 :picker-options="{
@@ -66,11 +87,17 @@
             </el-form-item>
           </el-form>
           <div class="el-dialog__footer dialog-footer">
-            <el-button type="primary" @click="handleAttendance">保存更新</el-button>
+            <el-button
+              type="primary"
+              @click="handleAttendance"
+            >保存更新</el-button>
             <el-button @click="handleClose">取消</el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="请假设置" name="second">
+        <el-tab-pane
+          label="请假设置"
+          name="second"
+        >
           <el-form
             ref="leaveForm"
             :rules="rules"
@@ -79,7 +106,10 @@
             label-width="80px"
             class="titmInfo"
           >
-            <el-form-item label="部门：" prop="departmentId">
+            <el-form-item
+              label="部门："
+              prop="departmentId"
+            >
               <el-select
                 v-model="leaveBase.departmentId"
                 placeholder="请选择"
@@ -95,8 +125,16 @@
             </el-form-item>
           </el-form>
           <p>假期类型</p>
-          <el-table ref="singleTable" :data="stateData.type" style="width: 100%">
-            <el-table-column prop="name" label="类型" width="200" />
+          <el-table
+            ref="singleTable"
+            :data="stateData.type"
+            style="width: 100%"
+          >
+            <el-table-column
+              prop="name"
+              label="类型"
+              width="200"
+            />
             <el-table-column label="是否可用">
               <template slot-scope="scope">
                 <el-switch
@@ -108,10 +146,18 @@
             </el-table-column>
           </el-table>
           <div class="el-dialog__footer dialog-footer">
-            <el-button type="primary" @click="handleLeave">保存更新</el-button>
+            <el-button
+              type="primary"
+              @click="handleLeave"
+            >保存更新</el-button>
             <el-button @click="handleClose">取消</el-button>
           </div>
-          <el-alert type="warning" show-icon :closable="false" title>
+          <el-alert
+            type="warning"
+            show-icon
+            :closable="false"
+            title
+          >
             <template>
               <div class="tipInfo">
                 <p>事假 请假单位为0.5天 只能提交工作日内的请假单</p>
@@ -120,7 +166,10 @@
             </template>
           </el-alert>
         </el-tab-pane>
-        <el-tab-pane label="扣款设置" name="third">
+        <el-tab-pane
+          label="扣款设置"
+          name="third"
+        >
           <el-form
             ref="deductionsForm"
             :rules="rules"
@@ -129,7 +178,10 @@
             label-width="80px"
             class="titmInfo"
           >
-            <el-form-item label="部门：" prop="departmentId">
+            <el-form-item
+              label="部门："
+              prop="departmentId"
+            >
               <el-select
                 v-model="deductionsBase.departmentId"
                 placeholder="请选择"
@@ -144,7 +196,11 @@
               </el-select>
             </el-form-item>
           </el-form>
-          <el-table ref="singleTable" :data="stateData.departmentType" style="width: 100%">
+          <el-table
+            ref="singleTable"
+            :data="stateData.departmentType"
+            style="width: 100%"
+          >
             <el-table-column>
               <template slot-scope="scope">
                 <div>
@@ -157,7 +213,10 @@
                   />
                 </div>
 
-                <div v-if="scope.row.dedTypeCode==='51000'" class="attentInfo">
+                <div
+                  v-if="scope.row.dedTypeCode==='51000'"
+                  class="attentInfo"
+                >
                   <p>
                     迟到≤
                     <el-input
@@ -198,7 +257,11 @@
                   </div>
                   <p>
                     迟到>
-                    <el-input v-model="scope.row.periodLowerLimit" class="inputInfo" disabled />分钟
+                    <el-input
+                      v-model="scope.row.periodLowerLimit"
+                      class="inputInfo"
+                      disabled
+                    />分钟
                   </p>
                   <div class="deductionInfo">
                     <p>
@@ -216,7 +279,10 @@
                     </p>
                   </div>
                 </div>
-                <div v-if="scope.row.dedTypeCode==='52000'" class="attentInfo">
+                <div
+                  v-if="scope.row.dedTypeCode==='52000'"
+                  class="attentInfo"
+                >
                   <p>
                     早退≤
                     <el-input
@@ -242,7 +308,11 @@
                     </p>
                     <p>
                       早退>
-                      <el-input v-model="scope.row.timesLowerLimit" class="inputInfo" disabled />次，每次扣款
+                      <el-input
+                        v-model="scope.row.timesLowerLimit"
+                        class="inputInfo"
+                        disabled
+                      />次，每次扣款
                       <el-input
                         v-model="scope.row.dedAmonutLowerLimit"
                         class="inputInfo"
@@ -252,7 +322,11 @@
                   </div>
                   <p>
                     早退>
-                    <el-input v-model="scope.row.periodLowerLimit" class="inputInfo" disabled />分钟
+                    <el-input
+                      v-model="scope.row.periodLowerLimit"
+                      class="inputInfo"
+                      disabled
+                    />分钟
                   </p>
                   <div style="padding-left:120px;">
                     <p>
@@ -270,7 +344,10 @@
                     </p>
                   </div>
                 </div>
-                <div v-if="scope.row.dedTypeCode==='53000'" class="attentInfo">
+                <div
+                  v-if="scope.row.dedTypeCode==='53000'"
+                  class="attentInfo"
+                >
                   <p>
                     矿工按
                     <el-input
@@ -284,11 +361,17 @@
             </el-table-column>
           </el-table>
           <div class="el-dialog__footer dialog-footer">
-            <el-button type="primary" @click="handleDeductions">保存更新</el-button>
+            <el-button
+              type="primary"
+              @click="handleDeductions"
+            >保存更新</el-button>
             <el-button @click="handleClose">取消</el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="加班设置" name="fourth">
+        <el-tab-pane
+          label="加班设置"
+          name="fourth"
+        >
           <el-form
             ref="overtimeForm"
             :model="overtimeBase"
@@ -296,7 +379,10 @@
             label-width="110px"
           >
 
-            <el-form-item label="部门：" prop="departmentId">
+            <el-form-item
+              label="部门："
+              prop="departmentId"
+            >
               <el-select
                 v-model="overtimeBase.departmentId"
                 placeholder="请选择"
@@ -311,7 +397,11 @@
               </el-select>
             </el-form-item>
             <el-form-item label="加班规则：">
-              <div v-for="item in overtimeBase.rules" :key="item.id" class="ruleInfo">
+              <div
+                v-for="item in overtimeBase.rules"
+                :key="item.id"
+                class="ruleInfo"
+              >
                 <el-row>
                   <el-col :span="8">
                     <div class="grid-content bg-purple">
@@ -352,13 +442,22 @@
                 </el-row>
               </div>
             </el-form-item>
-            <el-form-item label="打卡验证：" prop="isClock">
+            <el-form-item
+              label="打卡验证："
+              prop="isClock"
+            >
               <el-switch v-model="overtimeBase.isClock" />&nbsp;&nbsp;加班需要有打卡记录
             </el-form-item>
-            <el-form-item label="开启补偿：" prop="isCompensationint">
+            <el-form-item
+              label="开启补偿："
+              prop="isCompensationint"
+            >
               <el-switch v-model="overtimeBase.isCompensationint" />
             </el-form-item>
-            <el-form-item label="调休假设置：" prop="latestEffectDate">
+            <el-form-item
+              label="调休假设置："
+              prop="latestEffectDate"
+            >
               <div class="ruleInfo">
                 最晚有效期： 次年
                 <el-date-picker
@@ -369,17 +468,26 @@
                 />
               </div>
             </el-form-item>
-            <el-form-item label prop="unit">
+            <el-form-item
+              label
+              prop="unit"
+            >
               <div class="ruleInfo">
                 <p>
                   请假最小单位
-                  <el-input v-model="overtimeBase.unit" style="width:50px" />天
+                  <el-input
+                    v-model="overtimeBase.unit"
+                    style="width:50px"
+                  />天
                 </p>
               </div>
             </el-form-item>
           </el-form>
           <div class="el-dialog__footer dialog-footer">
-            <el-button type="primary" @click="handleOvertime">保存更新</el-button>
+            <el-button
+              type="primary"
+              @click="handleOvertime"
+            >保存更新</el-button>
             <el-button @click="handleClose">取消</el-button>
           </div>
         </el-tab-pane>
@@ -407,7 +515,7 @@ import * as commonApi from '@/utils'
 export default {
   name: 'Add',
   props: [],
-  data() {
+  data () {
     return {
       dialogFormVisible: false,
       isShowSelect: false,
@@ -470,43 +578,43 @@ export default {
     }
   },
   computed: {
-    inpNum() {
+    inpNum () {
       return this.oldNum
     }
   },
   // 创建完毕状态
-  created() {
+  created () {
     this.getDepartments() // 获取部门数据
     this.stateData = attendanceApi
   },
   methods: {
     // 业务方法
     // 获取部门
-    async getDepartments() {
+    async getDepartments () {
       const { depts } = await getDepartments()
       this.departmentData = depts
       this.formBase.departmentId = this.leaveBase.departmentId = this.deductionsBase.departmentId = this.overtimeBase.departmentId = this.departmentData[0].id
       this.handleChange(this.leaveBase.departmentId)
     },
     // 弹层显示
-    dialogFormV() {
+    dialogFormV () {
       this.dialogFormVisible = true
     },
     // 弹层隐藏
-    dialogFormH() {
+    dialogFormH () {
       this.dialogFormVisible = false
     },
-    clearFormDate() {
+    clearFormDate () {
       this.formBase = {}
     },
     // 退出
-    handleClose() {
+    handleClose () {
       this.dialogFormH()
       this.clearFormDate()
     },
     // 界面交互
     // 表单提交
-    createData() {
+    createData () {
       this.formBase.formOfEmployment = this.formOfEmployment
       this.$refs.dataForm.validate(async valid => {
         if (valid) {
@@ -519,11 +627,11 @@ export default {
       })
     },
     // 出勤选择部门
-    async handleChange(val) {
+    async handleChange (val) {
       this.formBase = await getAttendance({ departmentId: val })
     },
     // 请假选择部门
-    async handleChangeLeave(val) {
+    async handleChangeLeave (val) {
       this.leaveBase.departmentId = val
       this.stateData.type.forEach(item => {
         item.isEnable = false
@@ -544,7 +652,7 @@ export default {
       })
     },
     // 扣款选择部门
-    async  handleChangeDeductions(val) {
+    async handleChangeDeductions (val) {
       this.deductionsBase.departmentId = val
       this.stateData.departmentType.forEach(item => {
         item.departmentId = val
@@ -567,7 +675,7 @@ export default {
       })
     },
     // 加班选择部门
-    async handleChangeovertime(val) {
+    async handleChangeovertime (val) {
       this.overtimeBase.departmentId = val
       this.overtimeBase.rules.forEach(item => {
         item.departmentId = val
@@ -581,11 +689,11 @@ export default {
       if (data.dayOffConfigs !== null || data.extraDutyConfig !== null) {
         this.overtimeBase.departmentId = data.dayOffConfigs.departmentId
         this.overtimeBase.latestEffectDate =
-              data.dayOffConfigs.latestEffectDate
+          data.dayOffConfigs.latestEffectDate
         this.overtimeBase.unit = data.dayOffConfigs.unit
         this.overtimeBase.isClock = data.extraDutyConfig.isClock
         this.overtimeBase.isCompensationint =
-              data.extraDutyConfig.isCompensationint
+          data.extraDutyConfig.isCompensationint
       }
       if (this.overtimeBase.isClock === 0) {
         this.overtimeBase.isClock = true
@@ -614,7 +722,7 @@ export default {
       }
     },
     // 考勤配置保存更新
-    async  handleAttendance() {
+    async handleAttendance () {
       this.$refs.dataForm.validate(async valid => {
         if (valid) {
           await attendanceSave(this.formBase)
@@ -624,7 +732,7 @@ export default {
       })
     },
     // 请假配置保存更新
-    handleLeave() {
+    handleLeave () {
       this.$refs.leaveForm.validate(async valid => {
         if (valid) {
           this.tylelist = this.stateData.type
@@ -642,7 +750,7 @@ export default {
       })
     },
     // 扣款配置保存更新
-    handleDeductions() {
+    handleDeductions () {
       this.$refs.deductionsForm.validate(async valid => {
         if (valid) {
           var deductionList = this.stateData.departmentType
@@ -660,7 +768,7 @@ export default {
       })
     },
     // 加班配置保存更新
-    handleOvertime() {
+    handleOvertime () {
       this.$refs.overtimeForm.validate(async valid => {
         if (valid) {
           var deductionList = this.overtimeBase
@@ -696,7 +804,7 @@ export default {
       })
     },
     // 点击设置标签
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       if (tab.index === '0') {
         if (this.formBase.departmentId !== '') {
           this.handleChange(this.formBase.departmentId)
@@ -716,19 +824,19 @@ export default {
         }
       }
     },
-    typeTip(obj) {
+    typeTip (obj) {
       this.$message.error(obj)
     },
     // 验证输入正整数
-    handleInput: function(e) {
+    handleInput: function (e) {
       getInteger(e, this.typeTip)
     },
     // 获取小数点后1位
-    handleInputPoint(e) {
+    handleInputPoint (e) {
       getIntegerPoint(e)
     },
     //
-    handleStatus(e, obj) {
+    handleStatus (e, obj) {
       obj.departmentId = this.deductionsBase.departmentId
       if (this.deductionsBase.departmentId === '') {
         this.$message.error('请选择部门')
@@ -740,7 +848,9 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-.inputInfo{width: 50px;}
+.inputInfo {
+  width: 50px;
+}
 
 .attentInfo {
   p {

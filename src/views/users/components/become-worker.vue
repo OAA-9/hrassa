@@ -1,25 +1,58 @@
 <template>
   <div class="BecomeARegularWorker">
     <div class="infoBox">
-      <div class="logo"><img src="./../../assets/img.jpeg" alt=""></div>
+      <div class="logo"><img
+          src="./../../assets/img.jpeg"
+          alt=""
+        ></div>
       <div class="info">
         <p><span class="name">{{ ruleForm.fullName }}</span></p>
-        <p><span>部门：</span> {{ ruleForm.department }}      <span>岗位：</span> {{ ruleForm.post }} </p>
+        <p><span>部门：</span> {{ ruleForm.department }} <span>岗位：</span> {{ ruleForm.post }} </p>
         <p><span>入职时间：</span> {{ ruleForm.timeOfEntry }} </p>
       </div>
     </div>
     <div>
-      <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="转正类型" prop="type">
-          <el-input v-model="ruleForm.type" style="width: 220px;" />
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+        <el-form-item
+          label="转正类型"
+          prop="type"
+        >
+          <el-input
+            v-model="ruleForm.type"
+            style="width: 220px;"
+          />
         </el-form-item>
-        <el-form-item label="转正日期" prop="obtainmentOfDate">
-          <el-date-picker v-model="ruleForm.obtainmentOfDate" type="date" placeholder="选择日期" />
+        <el-form-item
+          label="转正日期"
+          prop="obtainmentOfDate"
+        >
+          <el-date-picker
+            v-model="ruleForm.obtainmentOfDate"
+            type="date"
+            placeholder="选择日期"
+          />
         </el-form-item>
-        <el-form-item label="转正评价" prop="positiveEvaluation">
-          <el-input v-model="ruleForm.positiveEvaluation" type="textarea" style="width: 400px;" placeholder="显示提交申请人的评价" />
+        <el-form-item
+          label="转正评价"
+          prop="positiveEvaluation"
+        >
+          <el-input
+            v-model="ruleForm.positiveEvaluation"
+            type="textarea"
+            style="width: 400px;"
+            placeholder="显示提交申请人的评价"
+          />
         </el-form-item>
-        <div class="buttones" style="text-align: center;margin-top: 40px">
+        <div
+          class="buttones"
+          style="text-align: center;margin-top: 40px"
+        >
           <el-form-item>
             <el-button type="primary">通过</el-button>
             <el-button type="primary">驳回</el-button>
@@ -37,7 +70,7 @@ import { regularWorker } from '@/api/user'
 
 export default {
   name: 'UsersTableIndex',
-  data() {
+  data () {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
@@ -60,19 +93,19 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.regularWorker()
   },
   methods: {
-    async regularWorker() {
+    async regularWorker () {
       this.loading = true
       this.ruleForm = await regularWorker()
       this.loading = false
     },
-    handleRemove(file, fileList) {
+    handleRemove (file, fileList) {
       console.log(file, fileList)
     },
-    handlePictureCardPreview(file) {
+    handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     }
@@ -81,40 +114,42 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "./../../styles/variables";
-  .BecomeARegularWorker{
-    .infoBox{
-      display: flex;
-      border-bottom: solid 1px #ccc;
-      margin-bottom: 20px;
-      padding: 10px 0 20px 0;
-      img{
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-      }
-      .logo{
-        border:solid 1px #ccc;
-        width: 102px;
-        height: 102px;
-        border-radius: 50%;
-        margin-right: 20px;
-      }
-      .info{
-        p{
-          line-height: 30px;
-          .name{font-size: 16px;}
-          span{
-            font-weight: bold;
-            display: inline-block;
-            margin-right: 0px;
-            margin-left: 10px;
-          }
+@import "./../../styles/variables";
+.BecomeARegularWorker {
+  .infoBox {
+    display: flex;
+    border-bottom: solid 1px #ccc;
+    margin-bottom: 20px;
+    padding: 10px 0 20px 0;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    .logo {
+      border: solid 1px #ccc;
+      width: 102px;
+      height: 102px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    .info {
+      p {
+        line-height: 30px;
+        .name {
+          font-size: 16px;
+        }
+        span {
+          font-weight: bold;
+          display: inline-block;
+          margin-right: 0px;
+          margin-left: 10px;
         }
       }
-      .buttones{
-        text-align: center;
-      }
+    }
+    .buttones {
+      text-align: center;
     }
   }
+}
 </style>

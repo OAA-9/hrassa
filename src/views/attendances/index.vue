@@ -1,20 +1,47 @@
 <template>
-  <div v-loading="loading" class="dashboard-container">
+  <div
+    v-loading="loading"
+    class="dashboard-container"
+  >
     <div class="app-container">
       <!-- 工具栏 -->
       <page-tools :show-before="true">
         <!-- 前面内容 -->
         <template v-slot:before>有 {{ attendInfo.tobeTaskCount }} 条考勤审批尚未处理</template>
         <template v-slot:after>
-          <el-button size="mini" type="danger" @click="$router.push('/import?type=attendance')">导入</el-button>
-          <el-button size="mini" type="warning">提醒</el-button>
-          <el-button size="mini" type="primary" @click="handleSet">设置</el-button>
-          <el-button size="mini" type="default" @click="$router.push('/attendances/archiving/')">历史归档</el-button>
-          <el-button size="mini" type="primary" @click="$router.push({'path':'/attendances/report/'+ yearMonth})">{{ yearMonth }}报表</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="$router.push('/import?type=attendance')"
+          >导入</el-button>
+          <el-button
+            size="mini"
+            type="warning"
+          >提醒</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleSet"
+          >设置</el-button>
+          <el-button
+            size="mini"
+            type="default"
+            @click="$router.push('/attendances/archiving/')"
+          >历史归档</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            @click="$router.push({'path':'/attendances/report/'+ yearMonth})"
+          >{{ yearMonth }}报表</el-button>
         </template>
       </page-tools>
       <el-card class="hr-block">
-        <el-form ref="formData" :model="formData" label-width="120px" class="formInfo">
+        <el-form
+          ref="formData"
+          :model="formData"
+          label-width="120px"
+          class="formInfo"
+        >
           <el-form-item label="部门:">
             <el-checkbox-group v-model="formData.deptID">
               <el-checkbox
@@ -45,16 +72,29 @@
         <!-- 考勤列表 -->
         <div style="width:100%;position: relative;overflow-x: auto; overflow-y: hidden;">
           <div style="width: 3000px;">
-            <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableInfo">
+            <table
+              border="0"
+              align="center"
+              cellpadding="0"
+              cellspacing="0"
+              class="tableInfo"
+            >
               <tr>
                 <th width="50">序号</th>
                 <th width="100">姓名</th>
                 <th width="100">工号</th>
                 <th width="200">部门</th>
                 <th width="100">手机</th>
-                <th v-for="(it, ind) in monthOfReport" :key="ind" width="110">{{ attendInfo.month }}/{{ ind + 1 }}</th>
+                <th
+                  v-for="(it, ind) in monthOfReport"
+                  :key="ind"
+                  width="110"
+                >{{ attendInfo.month }}/{{ ind + 1 }}</th>
               </tr>
-              <tr v-for="(item, index) in list" :key="item.id">
+              <tr
+                v-for="(item, index) in list"
+                :key="item.id"
+              >
                 <td width="50">{{ index }}</td>
                 <td width="100">{{ item.username }}</td>
                 <td width="100">{{ item.workNumber }}</td>
@@ -99,7 +139,10 @@
           width="30%"
           center
         >
-          <span slot="title" style="color:#fff;">{{ attendInfo.name }} {{ attendInfo.month }}/{{ attendInfo.getDate }}（实际工作日考勤方案）</span>
+          <span
+            slot="title"
+            style="color:#fff;"
+          >{{ attendInfo.name }} {{ attendInfo.month }}/{{ attendInfo.getDate }}（实际工作日考勤方案）</span>
           <div class="attenInfo">
             <p class="colRed">注：统计考勤时，异常状态优先正常状态</p>
             <p class="check">
@@ -110,15 +153,27 @@
                   :label="item.id"
                   :value="item.name"
                 >{{ item.name }}</el-radio>
-              </el-radio-group></p>
+              </el-radio-group>
+            </p>
           </div>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="btnOK">确定</el-button>
+          <span
+            slot="footer"
+            class="dialog-footer"
+          >
+            <el-button
+              type="primary"
+              @click="btnOK"
+            >确定</el-button>
             <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
         <!-- 分页组件 -->
-        <el-row type="flex" align="middle" justify="center" style="height: 60px">
+        <el-row
+          type="flex"
+          align="middle"
+          justify="center"
+          style="height: 60px"
+        >
           <el-pagination
             :page-size="page.pagesize"
             :current-page="page.page"
@@ -140,13 +195,23 @@
         <div class="attenInfo">
           <p>系统将通过邮件与短信的形式，对全体员工中存在旷工的考勤进行提醒，该提醒每月仅可发送 1 次。</p>
         </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="handleSub">我知道了</el-button>
+        <span
+          slot="footer"
+          class="dialog-footer"
+        >
+          <el-button
+            type="primary"
+            @click="handleSub"
+          >我知道了</el-button>
           <el-button @click="centerDialogVisible = false">取消</el-button>
         </span>
       </el-dialog>
       <!-- 设置组件 -->
-      <attendance-set ref="set" @handleCloseModal="handleCloseModal" /></el-card></div>
+      <attendance-set
+        ref="set"
+        @handleCloseModal="handleCloseModal"
+      /></el-card>
+  </div>
 </template>
 
 <script>
@@ -157,7 +222,7 @@ import { getDepartments } from '@/api/departments'
 export default {
   name: 'Attendances',
   components: { AttendanceSet },
-  data() {
+  data () {
     return {
       list: [],
       selectData: [],
@@ -199,35 +264,35 @@ export default {
     }
   },
   // 创建完毕状态
-  created() {
+  created () {
     this.getAttendancesList() // 获取考勤列表
     this.getDepartments() // 获取考勤列表
   },
   methods: {
     // 暂时不处理
-    handleSub() {
+    handleSub () {
       this.tipsDialogVisible = false
       this.$message.success('提醒成功')
     },
-    handleTip() {
+    handleTip () {
       this.tipsDialogVisible = true
     },
     // 设置
-    handleSet() {
+    handleSet () {
       this.$refs.set.dialogFormV()
     },
     // 弹框关闭
-    handleCloseModal() {
+    handleCloseModal () {
       this.$refs.set.dialogFormH()
     },
     // 获取组织列表
-    async getDepartments() {
+    async getDepartments () {
       const { depts } = await getDepartments()
       this.departments = depts
     },
 
     // 初始化数据
-    async getAttendancesList() {
+    async getAttendancesList () {
       this.loading = true
       const { data, monthOfReport, tobeTaskCount } = await getAttendancesList({ ...this.page })
       this.list = data.rows // 当前记录
@@ -246,17 +311,17 @@ export default {
       this.loading = false
     },
     // 确定修改
-    async  btnOK() {
+    async btnOK () {
       await updateAttendance(this.modifyData)
       this.centerDialogVisible = false
       this.getAttendancesList() // 成功之后 重新拉取数据
     },
     // 页码改变
-    pageChange(page) {
+    pageChange (page) {
       this.page.page = page
       this.getAttendancesList() // 获取数据
     },
-    showChangeDialog(item, id, it) {
+    showChangeDialog (item, id, it) {
       this.modifyData.userId = item.id
       this.modifyData.day = it.day
       this.modifyData.departmentId = item.departmentId
@@ -274,29 +339,29 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .tableInfo {
-    line-height: 36px;
-    border: solid 1px #ebeef5;
-    border-right: 0 none;
-    border-bottom: 0 none;
-    tr {
-      th {
-        height: 50px;
-        text-align: center;
-        border-right: solid 1px #ebeef5;
-        border-bottom: solid 1px #ebeef5;
-        border-bottom: 2px solid #e8e8e8;
-        background: #fafafa;
-        min-width:  100px;
-      }
-      td {
-        height: 36px;
-        text-align: center;
-        border-right: solid 1px #ebeef5;
-        border-bottom: solid 1px #ebeef5;
-      }
+.tableInfo {
+  line-height: 36px;
+  border: solid 1px #ebeef5;
+  border-right: 0 none;
+  border-bottom: 0 none;
+  tr {
+    th {
+      height: 50px;
+      text-align: center;
+      border-right: solid 1px #ebeef5;
+      border-bottom: solid 1px #ebeef5;
+      border-bottom: 2px solid #e8e8e8;
+      background: #fafafa;
+      min-width: 100px;
+    }
+    td {
+      height: 36px;
+      text-align: center;
+      border-right: solid 1px #ebeef5;
+      border-bottom: solid 1px #ebeef5;
     }
   }
+}
 
 .attenInfo {
   p {
@@ -304,10 +369,9 @@ export default {
       padding: 20px 0 0;
     }
     .el-radio {
-        display: inline-block;
-        width: 60px;
-        padding: 5px 0;
-
+      display: inline-block;
+      width: 60px;
+      padding: 5px 0;
     }
   }
 }

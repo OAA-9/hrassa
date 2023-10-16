@@ -2,7 +2,10 @@
   <div class="AdjustThePost">
     <div class="infoBox">
       <div class="logo">
-        <img src="@/assets/common/img.jpeg" alt>
+        <img
+          src="@/assets/common/img.jpeg"
+          alt
+        >
       </div>
       <div class="info">
         <p>
@@ -26,7 +29,10 @@
         class="demo-ruleForm"
       >
 
-        <el-form-item label="期望离职时间：" prop="expectedDepartureTime">
+        <el-form-item
+          label="期望离职时间："
+          prop="expectedDepartureTime"
+        >
           <el-date-picker
             v-model="ruleForm.data.exceptTime"
             type="date"
@@ -35,7 +41,10 @@
             :disabled="computeOpType"
           />
         </el-form-item>
-        <el-form-item label="离职原因：" prop="reasonsForLeaving">
+        <el-form-item
+          label="离职原因："
+          prop="reasonsForLeaving"
+        >
           <el-input
             v-model="ruleForm.data.reason"
             type="textarea"
@@ -44,7 +53,10 @@
             :disabled="computeOpType"
           />
         </el-form-item>
-        <div class="buttones" style="text-align: center;margin-top: 40px">
+        <div
+          class="buttones"
+          style="text-align: center;margin-top: 40px"
+        >
           <el-form-item>
             <el-button
               v-show="(ruleForm.state == 0 || ruleForm.state == 1) && tabLab =='launch'"
@@ -93,7 +105,7 @@ export default {
       default: ''
     }
   },
-  data() {
+  data () {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
@@ -102,35 +114,35 @@ export default {
     }
   },
   computed: {
-    computeOpType() {
+    computeOpType () {
       return this.ruleForm.stateOfApproval !== '已撤销'
     }
   },
-  created() {
+  created () {
     this.init()
   },
   methods: {
-    async init() {
+    async init () {
       const data = await getApprovalsDetail(this.selectedId)
       this.ruleForm = data
       this.ruleForm.data = JSON.parse(this.ruleForm.procData)
     },
-    async btnClick() {
+    async btnClick () {
       await approvalsDel(this.selectedId)
       this.$message.success('撤销成功')
       this.$emit('closeDialog')
     },
-    async btnPass() {
+    async btnPass () {
       await approvalsPass({ id: this.selectedId })
       this.$message.success('操作成功')
       this.$emit('closeDialog')
     },
-    async btnReject() {
+    async btnReject () {
       await approvalsReject({ id: this.selectedId })
       this.$message.success('操作成功')
       this.$emit('closeDialog')
     },
-    async btnSave() {
+    async btnSave () {
       const sendForm = {}
       sendForm.processInstanceId = this.selectedId
       sendForm.expectedDepartureTime = this.ruleForm.startTime
@@ -141,13 +153,13 @@ export default {
         this.$emit('closeDialog')
       }
     },
-    handleRemove(file, fileList) {
+    handleRemove (file, fileList) {
       console.log(file, fileList)
     },
-    updateData() {
+    updateData () {
       this.init()
     },
-    handlePictureCardPreview(file) {
+    handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     }

@@ -9,17 +9,35 @@
         </el-button>
       </div>
     </div> -->
-    <el-dialog title="导出" width="500px" :visible.sync="exportData">
+    <el-dialog
+      title="导出"
+      width="500px"
+      :visible.sync="exportData"
+    >
       <div class="exportTit"> 如果导出每月数据过多，请使用筛选功能后导出 </div>
       <div class="exportCont">
-        审批发起月份：<el-date-picker v-model="value" type="date" placeholder="选择日期" />
+        审批发起月份：<el-date-picker
+          v-model="value"
+          type="date"
+          placeholder="选择日期"
+        />
       </div>
-      <div slot="footer" class="dialog-footer">
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button @click="exportData = false">取 消</el-button>
-        <el-button type="primary" @click="exportDataAct()">确 定</el-button>
+        <el-button
+          type="primary"
+          @click="exportDataAct()"
+        >确 定</el-button>
       </div>
     </el-dialog>
-    <component :is="process" ref="set" @handleCloseModal="handleCloseModal" />
+    <component
+      :is="process"
+      ref="set"
+      @handleCloseModal="handleCloseModal"
+    />
   </div>
 </template>
 
@@ -31,7 +49,7 @@ export default {
   components: {
     process
   },
-  data() {
+  data () {
     return {
       process: 'process',
       exportData: false,
@@ -41,7 +59,7 @@ export default {
     }
   },
   methods: {
-    exportDataAct() {
+    exportDataAct () {
       if (!this.value) {
         this.$message.success('请选择导出时间！')
       } else {
@@ -50,11 +68,11 @@ export default {
         })
       }
     },
-    handlSet() {
+    handlSet () {
       this.$refs.set.dialogFormV()
     },
     // 弹框关闭
-    handleCloseModal() {
+    handleCloseModal () {
       this.$refs.addUser.dialogFormH()
       this.$refs.positive.dialogFormH()
     }

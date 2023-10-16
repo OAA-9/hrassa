@@ -3,7 +3,10 @@
     <div class="contLeft">
       <h2>{{ information.user_name }}申请离职</h2>
       <div class="topTit">
-        <img src="@/assets/common/img.jpeg" alt>
+        <img
+          src="@/assets/common/img.jpeg"
+          alt
+        >
         <div class="info">
           <p class="name">
             <strong>{{ information.username }}</strong>
@@ -36,7 +39,10 @@
         <strong>审批记录</strong>
       </div>
       <div class="Items">
-        <li v-for="(item, index) in taskInstanceOutList" :key="index">
+        <li
+          v-for="(item, index) in taskInstanceOutList"
+          :key="index"
+        >
           <div class="name">
             <p>{{ item.handleTime | formatDate }}</p>
             <!-- <p>{{item.description}}</p> -->
@@ -61,7 +67,7 @@ import { getApprovalsDetail, getApprovalsTaskDetail, downImg } from '@/api/appro
 export default {
   name: 'UsersTableIndex',
 
-  data() {
+  data () {
     return {
       approvalId: this.$route.params.id,
       information: {
@@ -71,20 +77,20 @@ export default {
       imgs: ''
     }
   },
-  created() {
+  created () {
     this.getApprovalsDetail()
     this.getApprovalsTaskDetail()
   },
   methods: {
-    async getApprovalsDetail() {
+    async getApprovalsDetail () {
       this.information = await getApprovalsDetail(this.approvalId)
       this.information.data = JSON.parse(this.information.procData)
     },
-    async getApprovalsTaskDetail() {
+    async getApprovalsTaskDetail () {
       this.taskInstanceOutList = await getApprovalsTaskDetail(this.approvalId)
     },
     // 图片下载
-    async getReviewHistory(id) {
+    async getReviewHistory (id) {
       const response = await downImg(id)
       this.imgs = 'data:image/png;base64,' + btoa(
         new Uint8Array(response.request.response).reduce((data, byte) => data + String.fromCharCode(byte), '')

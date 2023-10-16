@@ -16,16 +16,38 @@
         </div>
       </div>
     </div>
-    <div v-loading="loading" class="historicalTable">
-      <div v-show="showArchivig" class="archivig">该年份无归档报表</div>
-      <div v-for="( itemes, index) in tableData" :key="index" class="itemes">
-        <div class="itemTopLab" :class="{act: itemes.act}">
-          <div class="lab" @click="openTable(itemes,index)">
+    <div
+      v-loading="loading"
+      class="historicalTable"
+    >
+      <div
+        v-show="showArchivig"
+        class="archivig"
+      >该年份无归档报表</div>
+      <div
+        v-for="( itemes, index) in tableData"
+        :key="index"
+        class="itemes"
+      >
+        <div
+          class="itemTopLab"
+          :class="{act: itemes.act}"
+        >
+          <div
+            class="lab"
+            @click="openTable(itemes,index)"
+          >
             >
           </div>
           <div>
-            <p ref="sheelName" class="title">{{ itemes.archiveYear }}-{{ itemes.archiveMonth }}月员工报表</p>
-            <p class="labTit" @click="openTable(itemes,index)">考勤统计</p>
+            <p
+              ref="sheelName"
+              class="title"
+            >{{ itemes.archiveYear }}-{{ itemes.archiveMonth }}月员工报表</p>
+            <p
+              class="labTit"
+              @click="openTable(itemes,index)"
+            >考勤统计</p>
           </div>
           <div class="fr">
             <div>
@@ -42,7 +64,10 @@
             </div>
           </div>
         </div>
-        <div v-show="itemes.act" class="itemDropDown">
+        <div
+          v-show="itemes.act"
+          class="itemDropDown"
+        >
           <el-alert
             title="迟到、早退和补签的统计单位为“次”；所有假期类型、外出、旷工的统计单位均为“天”。"
             type="warning"
@@ -65,39 +90,96 @@
             border
             style="width: 100%;text-align: center"
           >
-            <el-table-column prop="name" label="姓名" width="120" />
-            <el-table-column prop="workNumber" label="工号" width="100" />
-            <el-table-column prop="mobile" label="手机号" width="200" />
+            <el-table-column
+              prop="name"
+              label="姓名"
+              width="120"
+            />
+            <el-table-column
+              prop="workNumber"
+              label="工号"
+              width="100"
+            />
+            <el-table-column
+              prop="mobile"
+              label="手机号"
+              width="200"
+            />
             <!-- <el-table-column prop="atteSolution" label="当月考勤方案" width="200"></el-table-column>-->
-            <el-table-column prop="department" label="部门" width="200" />
+            <el-table-column
+              prop="department"
+              label="部门"
+              width="200"
+            />
             <!-- <el-table-column prop="twoLevelDepartment" label="二级部门" width="200"></el-table-column>
             <el-table-column prop="threeLevelDepartment" label="三级部门" width="200"></el-table-column>
             <el-table-column prop="workCity" label="工作城市" width="200"></el-table-column>-->
-            <el-table-column prop="leaveDays" label="事假" width="100" />
-            <el-table-column prop="dayOffLeaveDays" label="调休" width="100" />
-            <el-table-column prop="normalDays" label="正常" width="100" />
-            <el-table-column prop="laterTimes" label="迟到次数" width="100" />
-            <el-table-column prop="earlyTimes" label="早退次数" width="100" />
+            <el-table-column
+              prop="leaveDays"
+              label="事假"
+              width="100"
+            />
+            <el-table-column
+              prop="dayOffLeaveDays"
+              label="调休"
+              width="100"
+            />
+            <el-table-column
+              prop="normalDays"
+              label="正常"
+              width="100"
+            />
+            <el-table-column
+              prop="laterTimes"
+              label="迟到次数"
+              width="100"
+            />
+            <el-table-column
+              prop="earlyTimes"
+              label="早退次数"
+              width="100"
+            />
             <!--
             <el-table-column prop="hoursPerDays" label="日均时长（自然日）" width="150"></el-table-column>
             <el-table-column prop="hoursPerWorkDay" label="日均时长（工作日）" width="150"></el-table-column>
             <el-table-column prop="hoursPerRestDay" label="日均时长（休息日）" width="150"></el-table-column>
             <el-table-column prop="clockRate" label="打卡率（%）" width="120"></el-table-column>
             -->
-            <el-table-column prop="absenceDays" label="旷工天数" width="100" />
-            <el-table-column prop="isFullAttendanceint" :formatter="fStandards" label="是否全勤" width="100" />
+            <el-table-column
+              prop="absenceDays"
+              label="旷工天数"
+              width="100"
+            />
+            <el-table-column
+              prop="isFullAttendanceint"
+              :formatter="fStandards"
+              label="是否全勤"
+              width="100"
+            />
             <!--
             <el-table-column prop="actualAtteUnofficialDays" label="实际出勤天数（非正式）" width="180"></el-table-column>
             -->
-            <el-table-column prop="actualAtteOfficialDays" label="实际出勤天数（正式）" width="180" />
-            <el-table-column prop="workingDays" label="应出勤工作日" width="120" />
+            <el-table-column
+              prop="actualAtteOfficialDays"
+              label="实际出勤天数（正式）"
+              width="180"
+            />
+            <el-table-column
+              prop="workingDays"
+              label="应出勤工作日"
+              width="120"
+            />
             <!--
             <el-table-column prop="salaryStandards" label="计薪标准" width="100"></el-table-column>
             <el-table-column prop="salaryAdjustmentDays" label="计薪天数调整" width="120"></el-table-column>
             <el-table-column prop="workHour" label="工作时长" width="100"></el-table-column>
             <el-table-column prop="salaryUnofficialDays" label="计薪天数（非正式）" width="150"></el-table-column>
             -->
-            <el-table-column prop="salaryOfficialDays" label="计薪天数（正式）" width="150" />
+            <el-table-column
+              prop="salaryOfficialDays"
+              label="计薪天数（正式）"
+              width="150"
+            />
           </el-table>
           <!-- 分页 -->
           <!-- <div class="pagination">
@@ -127,7 +209,7 @@ export default {
   components: {
     // PageTool
   },
-  data() {
+  data () {
     return {
       num: 0,
       yearVal: '',
@@ -150,7 +232,7 @@ export default {
   },
   computed: {
     // 模糊搜索
-    tables() {
+    tables () {
       const search = this.baseData.keyword
       for (var i = 0; i < this.tableData.length; i++) {
         if (search) {
@@ -170,15 +252,15 @@ export default {
       return null
     }
   },
-  created() {
+  created () {
     const { preDates, preYear } = this.getMonth()
     this.yearVal = preDates
     this.requestParameters.year = preYear
     this.getDepartments()
   },
   methods: {
-    getMonth: function() {
-    /* 默认显示上个月的日期 */
+    getMonth: function () {
+      /* 默认显示上个月的日期 */
       var nowdays = new Date()
       var year = nowdays.getFullYear()
       var month = nowdays.getMonth()
@@ -199,10 +281,10 @@ export default {
         preMonth: preMonth
       }
     },
-    fStandards(state) {
+    fStandards (state) {
       return state === 0 ? '是' : '否'
     },
-    async getArchivingList(params) {
+    async getArchivingList (params) {
       this.tableData = await getArchivingList(params)
       if (this.tableData.length === 0) {
         this.showArchivig = true
@@ -212,14 +294,14 @@ export default {
       this.loading = false
     },
     // 部门
-    async  getDepartments() {
+    async getDepartments () {
       const { depts } = await getDepartments()
       this.departmentData = depts
       this.requestParameters.departmentId = depts[0].id
       this.getArchivingList(this.requestParameters)
     },
     // 获取列表
-    async openTable(obj, index) {
+    async openTable (obj, index) {
       this.baseData.atteArchiveMonthlyId = obj.id
       if (!obj.act) {
         this.contentData = await getArchivingCont(this.baseData)
@@ -230,16 +312,16 @@ export default {
       }
     },
     // 下载文件
-    handleExport(index) {
+    handleExport (index) {
 
     },
     // 选择部门
-    handleChange(val) {
+    handleChange (val) {
       this.requestParameters.departmentId = val
       this.init(this.requestParameters)
     },
     // 选择年份
-    handleChangeYear() {
+    handleChangeYear () {
       this.requestParameters.year = this.yearVal
       this.getArchivingList(this.requestParameters)
       if (this.tableData.length === 0) {
